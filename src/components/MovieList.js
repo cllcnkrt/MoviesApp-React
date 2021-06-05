@@ -2,6 +2,7 @@ import React from "react";
 
 const MovieList = (props) => {
   
+
     return (
       <div className="row">
         {props.movies.map((movie) => (
@@ -10,13 +11,14 @@ const MovieList = (props) => {
               <img
                 src={movie.imageURL}
                 className="card-img-top"
-                alt="sample card image"
+                alt="sample card"
               />
               <div className="card-body">
                 <h5 className="card-title">{movie.name}</h5>
                 <p className="card-text">{movie.overview}</p>
                 <div className="d-flex justify-content-between align-items-center">
                   <button
+                  onClick = {(event) => props.deleteMovieProp(movie)}
                     type="button"
                     className="btn btn-md btn-outline-danger"
                   >
