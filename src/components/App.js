@@ -1,5 +1,6 @@
 import React from "react";
 import MovieList from "./MovieList";
+import SearchBar from "./SearchBar";
 
 class App extends React.Component {
   state = {
@@ -50,26 +51,39 @@ class App extends React.Component {
         id: 12,
       },
     ],
+    searchQuery: "",
   };
 
   deleteMovie = (movie) => {
     const newMovieList = this.state.movies.filter((m) => m.id !== movie.id);
 
-    this.setState({
+    this.setState((state) => ({
       movies: newMovieList,
+    }));
+  };
+
+  searchMovie = (event) => {
+    this.setState({
+      searchQuery: event.target.value,
     });
   };
 
   render() {
+    let filteredMovies = this.state.movies.filter((movie) => {
+      return movie.name.toLowerCase().indexOf(this.state.searchQuery) !== -1;
+    });
+
     return (
       <div className="container">
         <div className="row">
-          <div className="col-lg-12"></div>
+          <div className="col-lg-12">
+            <SearchBar searchMovieProp={this.searchMovie} />
+          </div>
         </div>
 
-        <MovieList 
-        movies={this.state.movies} 
-        deleteMovieProp = {this.deleteMovie}
+        <MovieList
+          movies={filteredMovies}
+          deleteMovieProp={this.deleteMovie}
         />
       </div>
     );
