@@ -1,7 +1,8 @@
 import React from "react";
 import MovieList from "./MovieList";
 import SearchBar from "./SearchBar";
-import axios from 'axios'
+import axios from "axios";
+
 class App extends React.Component {
   state = {
     movies: [],
@@ -9,16 +10,15 @@ class App extends React.Component {
     searchQuery: "",
   };
 
-  async componentDidMount(){
+  async componentDidMount() {
     const response = await axios.get("http://localhost:3002/movies");
-    this.setState({ movies: response.data });
+    this.setState({
+      movies: response.data,
+    });
   }
 
-
-
-
-  deleteMovie =  async (movie) => {
-    axios.delete(`http://localhost:3002/movies${movie.id}`)
+  deleteMovie = async (movie) => {
+    axios.delete(`http://localhost:3002/movies${movie.id}`);
     const newMovieList = this.state.movies.filter((m) => m.id !== movie.id);
 
     this.setState((state) => ({
@@ -34,7 +34,11 @@ class App extends React.Component {
 
   render() {
     let filteredMovies = this.state.movies.filter((movie) => {
-      return movie.name.toLowerCase().indexOf(this.state.searchQuery) !== -1;
+      return (
+        movie.name
+          .toLowerCase()
+          .indexOf(this.state.searchQuery.toLowerCase()) !== -1
+      );
     });
 
     return (

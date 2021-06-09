@@ -2,10 +2,13 @@ import React from "react";
 
 const MovieList = (props) => {
   return (
+    
     <div className="row">
+      
       {props.movies.map((movie) => (
         <div className="col-lg-4" key={movie.id}>
-          <div className="card mb-4 shadow-sm">
+          <br />
+          <div className="card mb-4 shadow-sm  " >
             <img
               src={movie.imageURL}
               className="card-img-top"
@@ -20,7 +23,7 @@ const MovieList = (props) => {
                   type="button"
                   className="btn btn-md btn-outline-danger"
                 >
-                  Delete
+                  <b>Delete</b>
                 </button>
                 <h2>
                   <span className="badge bg-primary" color="red">
