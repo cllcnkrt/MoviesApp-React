@@ -34,6 +34,13 @@ class App extends React.Component {
     });
   };
 
+  addMovie = async (movie) => {
+    axios.post(`http://localhost:3002/movies`, movie);
+    this.setState((state) => ({
+      movies: state.movies.concat([movie]),
+    }));
+  };
+
   render() {
     let filteredMovies = this.state.movies.filter((movie) => {
       return (
@@ -46,25 +53,38 @@ class App extends React.Component {
     return (
       <Router>
         <div className="container">
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <React.Fragment>
-                <div className="row">
-                  <div className="col-lg-12">
-                    <SearchBar searchMovieProp={this.searchMovie} />
+          <switch>
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <React.Fragment>
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <SearchBar searchMovieProp={this.searchMovie} />
+                    </div>
                   </div>
-                </div>
 
-                <MovieList
-                  movies={filteredMovies}
-                  deleteMovieProp={this.deleteMovie}
+                  <MovieList
+                    movies={filteredMovies}
+                    deleteMovieProp={this.deleteMovie}
+                  />
+                </React.Fragment>
+              )}
+            ></Route>
+
+            <Route
+              path="/add"
+              render={(history) => (
+                <AddMovie
+                  onAddMovie={(movie) => {
+                    this.addMovie(movie);
+                    history.push("/");
+                  }}
                 />
-              </React.Fragment>
-            )}
-          ></Route>
-          <Route path="/add"  component ={AddMovie}/>
+              )}
+            />
+          </switch>
         </div>
       </Router>
     );
