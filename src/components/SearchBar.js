@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
           </div>
           <div className=" col-2">
             <button type = "button"
-            className ="btn btn-md btn-outline-warning"
+            className ="btn btn-md btn-warning"
             style = {{float: "right"}}
             >
               <b>Add Movie</b>

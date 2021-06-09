@@ -2,6 +2,8 @@ import React from "react";
 import MovieList from "./MovieList";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import AddMovie from "./AddMovie";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -42,15 +44,29 @@ class App extends React.Component {
     });
 
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <SearchBar searchMovieProp={this.searchMovie} />
-          </div>
-        </div>
+      <Router>
+        <div className="container">
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <React.Fragment>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <SearchBar searchMovieProp={this.searchMovie} />
+                  </div>
+                </div>
 
-        <MovieList movies={filteredMovies} deleteMovieProp={this.deleteMovie} />
-      </div>
+                <MovieList
+                  movies={filteredMovies}
+                  deleteMovieProp={this.deleteMovie}
+                />
+              </React.Fragment>
+            )}
+          ></Route>
+          <Route path="/add"  component ={AddMovie}/>
+        </div>
+      </Router>
     );
   }
 }
