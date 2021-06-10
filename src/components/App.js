@@ -14,6 +14,9 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
+    this.getMovies();
+  }
+  async getMovies() {
     const response = await axios.get("http://localhost:3002/movies");
     this.setState({
       movies: response.data,
@@ -36,20 +39,32 @@ class App extends React.Component {
   };
 
   addMovie = async (movie) => {
-    axios.post(`http://localhost:3002/movies`, movie);
+    await axios.post(`http://localhost:3002/movies`, movie);
     this.setState((state) => ({
       movies: state.movies.concat([movie]),
+      
     }));
+    this.getMovies();
   };
 
+  editMovie = async (id, updatedMovie) => {
+    await axios.put(`http://localhost:3002/movies/${id}`, updatedMovie);
+    this.getMovies();
+  };
+
+
   render() {
-    let filteredMovies = this.state.movies.filter(
-      (movie) => {
-          return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
-      }
-  ).sort((a, b) => {
-      return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
-  });
+    let filteredMovies = this.state.movies
+      .filter((movie) => {
+        return (
+          movie.name
+            .toLowerCase()
+            .indexOf(this.state.searchQuery.toLowerCase()) !== -1
+        );
+      })
+      .sort((a, b) => {
+        return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
+      });
 
     return (
       <Router>
@@ -76,7 +91,7 @@ class App extends React.Component {
 
             <Route
               path="/add"
-              render={(history) => (
+              render={({history}) => (
                 <AddMovie
                   onAddMovie={(movie) => {
                     this.addMovie(movie);
@@ -84,10 +99,22 @@ class App extends React.Component {
                   }}
                 />
               )}
-            >
-              </Route>
+            ></Route>
 
-                  <Route path ="/edit/:id" component ={EditMovie}/>
+            <Route
+              path="/edit/:id"
+              render={(props) => (
+                <EditMovie
+                {...props}
+                  onEditMovie={(id,movie) => {
+                    this.editMovie(id,movie);
+                  
+                  }}
+                />
+              )}
+            ></Route>
+
+           
           </switch>
         </div>
       </Router>

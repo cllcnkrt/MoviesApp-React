@@ -25,10 +25,34 @@ class EditMovie extends React.Component {
       year: response.data.year,
     });
   }
+  onInputChange =(event) =>{
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
+
+    const {name, rating, overview, year, director , imageURL} = this.state;
+    const id = this.props.match.params.id;
+
+    const  updatedMovie ={
+      name,
+      rating,
+      overview,
+      imageURL,
+      director,
+      year
+    }
+
+    this.props.onEditMovie(id,updatedMovie);
+    this.props.history.push('/');
   };
+
+
+  
+
 
   render() {
     return (
@@ -49,6 +73,7 @@ class EditMovie extends React.Component {
                 className="form-control"
                 name="name"
                 value={this.state.name}
+                onChange ={this.onInputChange}
               />
             </div>
             <div className="form-group col-md-8">
@@ -58,6 +83,7 @@ class EditMovie extends React.Component {
                 className="form-control"
                 name="director"
                 value={this.state.director}
+                onChange ={this.onInputChange}
               />
             </div>
             <div className="form-group col-md-8">
@@ -67,6 +93,7 @@ class EditMovie extends React.Component {
                 className="form-control"
                 name="year"
                 value={this.state.year}
+                onChange ={this.onInputChange}
               />
             </div>
             <div className="form-group col-md-8">
@@ -76,6 +103,7 @@ class EditMovie extends React.Component {
                 className="form-control"
                 name="rating"
                 value={this.state.rating}
+                onChange ={this.onInputChange}
               />
             </div>
            
@@ -88,6 +116,7 @@ class EditMovie extends React.Component {
                 className="form-control"
                 name="imageURL"
                 value={this.state.imageURL}
+                onChange ={this.onInputChange}
               />
             </div>
           </div>
@@ -99,6 +128,7 @@ class EditMovie extends React.Component {
                 name="overview"
                 rows="5"
                 value={this.state.overview}
+                onChange ={this.onInputChange}
               ></textarea>
             </div>
             <br />
@@ -106,7 +136,7 @@ class EditMovie extends React.Component {
           <input
             type="submit"
             className="btn btn-primary btn-block"
-            value="  Edit  "
+            value="Edit Movie"
           />
 
           <Link

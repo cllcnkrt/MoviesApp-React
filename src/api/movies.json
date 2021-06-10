@@ -1,6 +1,5 @@
 {
   "movies": [
-   
     {
       "id": 1,
       "name": "Beetlejuice",
@@ -2114,10 +2113,9 @@
     },
     {
       "id": 146,
-      "rating": 2.5,
+      "rating": "130",
       "name": "The Big Short",
       "year": "2015",
-      "rating": "130",
       "genres": [
         "Biography",
         "Comedy",
@@ -2130,11 +2128,11 @@
     },
     {
       "name": "The Ghost Rider",
+      "rating": "115",
+      "overview": "Cast. Nicolas Cage as Johnny Blaze / Ghost Rider, a motorcycle stunt rider, who is tricked into making a deal with the Devil thinking that it will save his father from dying, and is subsequently transformed into a supernatural demonic soul hunter, the Devil's Spirit of Vengeance, the Ghost Rider.",
+      "imageURL": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/b42BoaDFzgJIiDWMRF0Sz8YlweQ.jpg",
       "director": "Mark Steven Johnson",
       "year": "2007",
-      "rating": "115",
-      "imageURL": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/b42BoaDFzgJIiDWMRF0Sz8YlweQ.jpg",
-      "overview": "Cast. Nicolas Cage as Johnny Blaze / Ghost Rider, a motorcycle stunt rider, who is tricked into making a deal with the Devil thinking that it will save his father from dying, and is subsequently transformed into a supernatural demonic soul hunter, the Devil's Spirit of Vengeance, the Ghost Rider.",
       "id": 147
     }
   ]
