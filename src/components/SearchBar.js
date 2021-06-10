@@ -27,7 +27,7 @@ class SearchBar extends React.Component {
           <div className=" col-2">
             <Link type = "button"
             to ="/add"
-            className ="btn btn-md btn-warning"
+            className ="btn btn-md btn-success"
             style = {{float: "right"}}
             >
               <b>Add Movie</b>
